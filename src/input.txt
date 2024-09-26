@@ -1,25 +1,25 @@
+     insert 1234
+insert 25
+            insert 2
+insert 4000
 
-insert 111
-             insert 23
+insert 500
 
-insert 99
-insert         4
+              insert 300
 
-isEmpty
+insert 400
 
-    insert     111
+remove 400
 
-print
+           remove 40
+
+     remove 10
+
+remove 2
+
+       seek 300
+
+seek 6
 
 
-search 9
-
-remove 23
-
-remove 4
-remove 999999
-isEmptyasfh
-print
-
-insert 123
 print
