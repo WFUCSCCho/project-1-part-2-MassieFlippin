@@ -2,6 +2,10 @@
  @file: Parser.java
  @description: This program implements a parser class that reads commands from a file and processes them to operate on a BST
  The commands include insert, remove, seek, and print. This program also writes to a separate file "./result.txt"
+
+ My data set was downloaded from Kaggle and edited for formatting purposes. The link to the original data set on kaggle can be found
+ Here: https://www.kaggle.com/datasets/shudhanshusingh/real-estate-properties-dataset
+
  @author: Massie Flippin
  @date: September 26th , 2024
  ************************/
