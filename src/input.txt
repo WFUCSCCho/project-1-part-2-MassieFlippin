@@ -1,3 +1,4 @@
 insert 1
-insert 12684
+insert 2
+
 print

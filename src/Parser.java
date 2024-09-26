@@ -78,16 +78,19 @@ public class Parser {
                         String isPrimeLocatoin = data[14];
                         String lifespan = data[15];
 
-                        System.out.println("TEST");
+
                         RealEstateData newRealEstate = new RealEstateData(ID,possessionStatus,commercial,developer,price,sqftprice,funished,bathroom,facing,transaction,type,city,bedrooms,floors,isPrimeLocatoin,lifespan);
-                        System.out.println("TEST");
+
                         mybst.insert(newRealEstate);
                         System.out.println(newRealEstate.toString());
-
+                        writeToFile("\n", "./result.txt");
                         writeToFile("Inserted: " + newRealEstate.toString(), "./result.txt");
                          // exit after inserting matched word
                     }
                 }
+            }
+            case "remove"->{
+
             }
             case "print" ->{
                 //print statement with a StringBuilder collecting the content of the BST
