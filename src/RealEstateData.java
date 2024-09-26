@@ -37,8 +37,9 @@ public class RealEstateData implements Comparable<RealEstateData> {
         this.lifespan = "";
     }
 
+
     //Constructor for Real Estate Data.
-    public RealEstateData(int ID, String possessionstatus, String commercial, String developer, int price, int sqftprice, String furnished, int bathrooms, String facing, String transaction, String type, String city, int bedrooms, int floors, String isPrimeLocation, String lifespan){
+    /*public RealEstateData(int ID, String possessionstatus, String commercial, String developer, int price, int sqftprice, String furnished, int bathrooms, String facing, String transaction, String type, String city, int bedrooms, int floors, String isPrimeLocation, String lifespan){
         this.ID = ID;
         this.possessionstatus = possessionstatus;
         this.commercial = commercial;
@@ -55,11 +56,51 @@ public class RealEstateData implements Comparable<RealEstateData> {
         this.floors = floors;
         this.isPrimeLocation = isPrimeLocation;
         this.lifespan = lifespan;
+    }*/
+
+    /*public RealEstateData(int ID, String possessionStatus, String commercial, String developer, int sqftprice, String furnished, int bathroom, String facing, String transaction, String type, int bedrooms, int floors, String isPrimeLocatoin, String lifespan,String city) {
+        this.ID = ID;
+        this.possessionstatus = possessionStatus;
+        this.commercial = commercial;
+        this.developer = developer;
+        this.sqftprice = sqftprice;
+        this.furnished = furnished;
+        this.bathrooms = bathroom;
+        this.facing = facing;
+        this.transaction = transaction;
+        this.type = type;
+        this.city = city;
+        this.bedrooms = bedrooms;
+        this.floors = floors;
+        this.isPrimeLocation = isPrimeLocatoin;
+        this.lifespan = lifespan;
+
+    }*/
+
+    public RealEstateData(int id, String possessionStatus, String commercial, String developer, int price, int sqftprice, String funished, int bathroom, String facing, String transaction, String type, String city, int bedrooms, int floors, String isPrimeLocatoin, String lifespan) {
+        this.ID = id;
+        this.possessionstatus = possessionStatus;
+        this.commercial = commercial;
+        this.developer = developer;
+        this.price = price;
+        this.sqftprice = sqftprice;
+        this.furnished = funished;
+        this.bathrooms = bathroom;
+        this.facing = facing;
+        this.transaction = transaction;
+        this.type = type;
+        this.city = city;
+        this.bedrooms = bedrooms;
+        this.floors = floors;
+        this.isPrimeLocation = isPrimeLocatoin;
+        this.lifespan = lifespan;
     }
+
+
     //String Interface for Real Estate Data
     @Override
     public String toString() {
-        return "ID: " + ID + ", Possession Status: " + possessionstatus + ", Commercial: " + commercial + ", Developer: " + developer + ", Price: " + price + ", Sqftprice: " + sqftprice + ", Furnished: " + furnished + "Bathrooms: " + bathrooms + "Facing: " + facing + "Transaction: " + transaction + "Type: " + type + "City: " + city + "Bedrooms: " + bedrooms + "Floors: " + floors + "Prime Location: " + isPrimeLocation + "Lifespan: " + lifespan;
+        return "ID: " + ID + " Possession Status: " + possessionstatus + " Commercial: " + commercial + " Developer: " + developer + " Price: " + price + " Sqftprice: " + sqftprice + " Furnished: " + furnished + " Bathrooms: " + bathrooms + " Facing: " + facing + " Transaction: " + transaction + " Type: " + type + " City: " + city + " Bedrooms: " + bedrooms + " Floors: " + floors + " Prime Location: " + isPrimeLocation + " Lifespan: " + lifespan;
     }
     //Comparable interface for Real Estate Data
     //Ask Athena about this.
@@ -109,7 +150,7 @@ public class RealEstateData implements Comparable<RealEstateData> {
     public int getID() {
         return ID;
     }
-    public void setID(int iD) {
+    public void setID(int ID) {
         this.ID = ID;
     }
     //Getters and Setters for Possession Status
