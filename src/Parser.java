@@ -1,18 +1,16 @@
 /**
- @file: BST.java
+ @file: Parser.java
  @description: This program implements a parser class that reads commands from a file and processes them to operate on a BST
- The commands include insert, remove, searc, and print. This program also writes to a separate file "./result.txt"
+ The commands include insert, remove, seek, and print. This program also writes to a separate file "./result.txt"
  @author: Massie Flippin
- @date: September 19th , 2024
+ @date: September 26th , 2024
  ************************/
 import java.io.*;
-import java.nio.channels.ScatteringByteChannel;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Parser {
 
-    //Create a BST tree of Integer type
+    //Create a BST tree to store RealEstateData objects
     private BST<RealEstateData> mybst = new BST<>();
     //Constructor that takes the filename as input and calls the process method.
     public Parser(String filename) throws FileNotFoundException {
@@ -42,9 +40,9 @@ public class Parser {
     // Implement the operate_BST method
     // Determine the incoming command and operate on the BST
     public void operate_BST(String[] command) throws FileNotFoundException {
-        //path to the result.txt file
+        //path to the result.txt file. Not used but could be used in the future
         String newfile = "./result.txt";
-        // path to the csv file that contains the real estate data
+        //path to the csv file that contains the real estate data
         String csvFile = "C:\\Users\\mflip\\IdeaProjects\\project-1-part-2-MassieFlippin\\properties.updated.csv";
         //An array to hold all of the information
         String[] data = null;
@@ -54,44 +52,51 @@ public class Parser {
         switch (command[0]) {
             // insert case: inserts into BST and logs the result
             case "insert" -> {
-                //while loop to find the matching data
+                //skips the header line
                 csvScanner.nextLine();
+                //loop through the CSV file to find the matching ID
                 while(csvScanner.hasNextLine()){
                     String line = csvScanner.nextLine().trim();//trims away any data
-                    if(line.isEmpty()) continue;
+                    if(line.isEmpty()) continue;//skip the empty lines
                     data = line.split(",", -1);
-                    if(data[0].equals(command[1])){
-                        int ID = Integer.parseInt(data[0]);
-                        String possessionStatus = data[1];
-                        String commercial = data[2];
-                        String developer = data[3];
-                        int price = Integer.parseInt(data[4]);
-                        int sqftprice = Integer.parseInt(data[5]);
-                        String funished = data[6];
-                        int bathroom = Integer.parseInt(data[7]);
-                        String facing = data[8];
-                        String transaction = data[9];
-                        String type = data[10];
-                        String city = data[11];
-                        int bedrooms = Integer.parseInt(data[12]);
-                        int floors = Integer.parseInt(data[13]);
-                        String isPrimeLocatoin = data[14];
-                        String lifespan = data[15];
+                    //parse through the CSV fild to find the matching ID
+                    try {
+                        if (data[0].equals(command[1])) {
+                            int ID = Integer.parseInt(data[0]);
+                            String possessionStatus = data[1];
+                            String commercial = data[2];
+                            String developer = data[3];
+                            int price = Integer.parseInt(data[4]);
+                            int sqftprice = Integer.parseInt(data[5]);
+                            String funished = data[6];
+                            int bathroom = Integer.parseInt(data[7]);
+                            String facing = data[8];
+                            String transaction = data[9];
+                            String type = data[10];
+                            String city = data[11];
+                            int bedrooms = Integer.parseInt(data[12]);
+                            int floors = Integer.parseInt(data[13]);
+                            String isPrimeLocatoin = data[14];
+                            String lifespan = data[15];
 
+                            //create and insert the object into the BST
+                            RealEstateData newRealEstate = new RealEstateData(ID, possessionStatus, commercial, developer, price, sqftprice, funished, bathroom, facing, transaction, type, city, bedrooms, floors, isPrimeLocatoin, lifespan);
 
-                        RealEstateData newRealEstate = new RealEstateData(ID,possessionStatus,commercial,developer,price,sqftprice,funished,bathroom,facing,transaction,type,city,bedrooms,floors,isPrimeLocatoin,lifespan);
-
-                        mybst.insert(newRealEstate);
-                        System.out.println(newRealEstate.toString());
+                            mybst.insert(newRealEstate);
+                            writeToFile("\n", "./result.txt");
+                            writeToFile("Inserted: " + newRealEstate, "./result.txt");
+                        }
+                    }
+                    catch (NumberFormatException e){
                         writeToFile("\n", "./result.txt");
-                        writeToFile("Inserted: " + newRealEstate.toString(), "./result.txt");
-                         // exit after inserting matched word
+                        writeToFile("Invalid Insert ", "./result.txt");
+                        writeToFile("\n", "./result.txt");
                     }
                 }
 
             }
             case "remove"->{
-                //while loop to find the matching data
+                //remove case: parse through the CSV file to find the matching data. If it is stored in the BST remove
                 csvScanner.nextLine();
                 while(csvScanner.hasNextLine()){
                     String line = csvScanner.nextLine().trim();//trims away any data
@@ -127,7 +132,9 @@ public class Parser {
 
                     }
                     catch(NumberFormatException e){
+                        writeToFile("\n", "./result.txt");
                         writeToFile("Error: Invalid Remove", "./result.txt");
+                        writeToFile("\n", "./result.txt");
                     }
                 }
             }
@@ -182,7 +189,7 @@ public class Parser {
                     }
                     catch (NumberFormatException e){
                         writeToFile("\n", "./result.txt");
-                        writeToFile("Not Found ID:", "./result.txt");
+                        writeToFile("Invalid ID Search", "./result.txt");
                         writeToFile("\n", "./result.txt");
                     }
                 }

@@ -3,7 +3,7 @@
  @description: This program implements a generic binary tree node that can store a value of type T and have
  references to two child nodes.
  @author: Massie Flippin
- @date: September 19th , 2024
+ @date: September 26th , 2024
  ************************/
 
 //defines a generic binary node structure

@@ -1,3 +1,13 @@
+/**
+ * @file: RealEstateData.java
+ * @description: The RealEstateData class models a real estate property with various attribues. It implements the
+ * comparable interface, allowing properties to be compared based on price, sqft price, and ID. THe class also overrides
+ * equals for checking equality between property objects and provides a toString method for generating a readable string
+ * representation of property details.
+ * @author: Massie Flippin
+ * @date: September 26th , 2024
+ ************************/
+
 public class RealEstateData implements Comparable<RealEstateData> {
     //ID, Possession Status, Commercial, Developer, Price, SqFt Price, Furnished, Bathroom, Facing, Transaction Type, Type of Property, City, Bedroom, Floors, isPrimeLocation, Lifespan
     private int ID;
@@ -16,67 +26,7 @@ public class RealEstateData implements Comparable<RealEstateData> {
     private int floors;
     private String isPrimeLocation;
     private String lifespan;
-
-    //default constructor
-    public RealEstateData() {
-        this.ID = 0;
-        this.possessionstatus = "";
-        this.commercial = "";
-        this.developer = "";
-        this.price = 0;
-        this.sqftprice = 0;
-        this.furnished = "";
-        this.bathrooms = 0;
-        this.facing = "";
-        this.transaction = "";
-        this.type = "";
-        this.city = "";
-        this.bedrooms = 0;
-        this.floors = 0;
-        this.isPrimeLocation = "";
-        this.lifespan = "";
-    }
-
-
-    //Constructor for Real Estate Data.
-    /*public RealEstateData(int ID, String possessionstatus, String commercial, String developer, int price, int sqftprice, String furnished, int bathrooms, String facing, String transaction, String type, String city, int bedrooms, int floors, String isPrimeLocation, String lifespan){
-        this.ID = ID;
-        this.possessionstatus = possessionstatus;
-        this.commercial = commercial;
-        this.developer = developer;
-        this.price = price;
-        this.sqftprice = sqftprice;
-        this.furnished = furnished;
-        this.bathrooms = bathrooms;
-        this.facing = facing;
-        this.transaction = transaction;
-        this.type = type;
-        this.city = city;
-        this.bedrooms = bedrooms;
-        this.floors = floors;
-        this.isPrimeLocation = isPrimeLocation;
-        this.lifespan = lifespan;
-    }*/
-
-    /*public RealEstateData(int ID, String possessionStatus, String commercial, String developer, int sqftprice, String furnished, int bathroom, String facing, String transaction, String type, int bedrooms, int floors, String isPrimeLocatoin, String lifespan,String city) {
-        this.ID = ID;
-        this.possessionstatus = possessionStatus;
-        this.commercial = commercial;
-        this.developer = developer;
-        this.sqftprice = sqftprice;
-        this.furnished = furnished;
-        this.bathrooms = bathroom;
-        this.facing = facing;
-        this.transaction = transaction;
-        this.type = type;
-        this.city = city;
-        this.bedrooms = bedrooms;
-        this.floors = floors;
-        this.isPrimeLocation = isPrimeLocatoin;
-        this.lifespan = lifespan;
-
-    }*/
-
+    //Constructor to initialize the RealEstateData object with all its attributes
     public RealEstateData(int id, String possessionStatus, String commercial, String developer, int price, int sqftprice, String funished, int bathroom, String facing, String transaction, String type, String city, int bedrooms, int floors, String isPrimeLocatoin, String lifespan) {
         this.ID = id;
         this.possessionstatus = possessionStatus;
@@ -97,13 +47,12 @@ public class RealEstateData implements Comparable<RealEstateData> {
     }
 
 
-    //String Interface for Real Estate Data
+    //Overriding the toString method to provide a readable string representation of RealEstateData
     @Override
     public String toString() {
         return "ID: " + ID + " Possession Status: " + possessionstatus + " Commercial: " + commercial + " Developer: " + developer + " Price: " + price + " Sqftprice: " + sqftprice + " Furnished: " + furnished + " Bathrooms: " + bathrooms + " Facing: " + facing + " Transaction: " + transaction + " Type: " + type + " City: " + city + " Bedrooms: " + bedrooms + " Floors: " + floors + " Prime Location: " + isPrimeLocation + " Lifespan: " + lifespan;
     }
-    //Comparable interface for Real Estate Data
-    //Ask Athena about this.
+    //Comparable interface for how RealEstateData objects should be stored.
     @Override
     public int compareTo(RealEstateData other) {
         //First compare by price
@@ -127,6 +76,7 @@ public class RealEstateData implements Comparable<RealEstateData> {
         if (o == null || getClass() != o.getClass()){
             return false;
         }
+        //check each field for equality
         RealEstateData other = (RealEstateData) o;
         return ID == other.ID &&
                 this.possessionstatus.equals(other.possessionstatus) &&
