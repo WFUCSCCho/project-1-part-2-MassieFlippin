@@ -59,7 +59,6 @@ public class Parser {
                     String line = csvScanner.nextLine().trim();//trims away any data
                     if(line.isEmpty()) continue;
                     data = line.split(",", -1);
-                    System.out.println(Arrays.toString(data));
                     if(data[0].equals(command[1])){
                         int ID = Integer.parseInt(data[0]);
                         String possessionStatus = data[1];
@@ -88,9 +87,73 @@ public class Parser {
                          // exit after inserting matched word
                     }
                 }
+
             }
             case "remove"->{
+                //while loop to find the matching data
+                csvScanner.nextLine();
+                while(csvScanner.hasNextLine()){
+                    String line = csvScanner.nextLine().trim();//trims away any data
+                    if(line.isEmpty()) continue;
+                    data = line.split(",", -1);
+                    if(data[0].equals(command[1])){
+                        int ID = Integer.parseInt(data[0]);
+                        String possessionStatus = data[1];
+                        String commercial = data[2];
+                        String developer = data[3];
+                        int price = Integer.parseInt(data[4]);
+                        int sqftprice = Integer.parseInt(data[5]);
+                        String funished = data[6];
+                        int bathroom = Integer.parseInt(data[7]);
+                        String facing = data[8];
+                        String transaction = data[9];
+                        String type = data[10];
+                        String city = data[11];
+                        int bedrooms = Integer.parseInt(data[12]);
+                        int floors = Integer.parseInt(data[13]);
+                        String isPrimeLocatoin = data[14];
+                        String lifespan = data[15];
 
+
+                        RealEstateData newRealEstate = new RealEstateData(ID,possessionStatus,commercial,developer,price,sqftprice,funished,bathroom,facing,transaction,type,city,bedrooms,floors,isPrimeLocatoin,lifespan);
+
+                        mybst.remove(newRealEstate);
+                        System.out.println(newRealEstate);
+                        writeToFile("\n", "./result.txt");
+                        writeToFile("Removed: " + newRealEstate, "./result.txt");
+                    }
+                }
+            }
+            case "search" ->{
+                csvScanner.nextLine();
+                while(csvScanner.hasNextLine()){
+                    String line = csvScanner.nextLine().trim();
+                    if(line.isEmpty()) continue;
+                    data = line.split(",", -1);
+                    if(data[0].equals(command[1])){
+                        int ID = Integer.parseInt(data[0]);
+                        String possessionStatus = data[1];
+                        String commercial = data[2];
+                        String developer = data[3];
+                        int price = Integer.parseInt(data[4]);
+                        int sqftprice = Integer.parseInt(data[5]);
+                        String funished = data[6];
+                        int bathroom = Integer.parseInt(data[7]);
+                        String facing = data[8];
+                        String transaction = data[9];
+                        String type = data[10];
+                        String city = data[11];
+                        int bedrooms = Integer.parseInt(data[12]);
+                        int floors = Integer.parseInt(data[13]);
+                        String isPrimeLocatoin = data[14];
+                        String lifespan = data[15];
+
+                        RealEstateData newRealEstate = new RealEstateData(ID,possessionStatus,commercial,developer,price,sqftprice,funished,bathroom,facing,transaction,type,city,bedrooms,floors,isPrimeLocatoin,lifespan);
+                        System.out.println("TEST");
+                        mybst.find(newRealEstate);
+                        writeToFile("Searching ID: " + ID, "./result.txt");
+                    }
+                }
             }
             case "print" ->{
                 //print statement with a StringBuilder collecting the content of the BST
