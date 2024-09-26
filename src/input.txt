@@ -11,7 +11,7 @@ insert 400
 
 remove 400
 
-           remove 1
+           remove 40
 
 remove 2
 
