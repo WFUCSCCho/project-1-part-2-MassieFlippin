@@ -6,6 +6,7 @@
  @date: September 19th , 2024
  ************************/
 import java.io.*;
+import java.nio.channels.ScatteringByteChannel;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -96,7 +97,7 @@ public class Parser {
                     String line = csvScanner.nextLine().trim();//trims away any data
                     if(line.isEmpty()) continue;
                     data = line.split(",", -1);
-                    if(data[0].equals(command[1])){
+                    if(data[0].equals(command[1])) {
                         int ID = Integer.parseInt(data[0]);
                         String possessionStatus = data[1];
                         String commercial = data[2];
@@ -115,16 +116,29 @@ public class Parser {
                         String lifespan = data[15];
 
 
-                        RealEstateData newRealEstate = new RealEstateData(ID,possessionStatus,commercial,developer,price,sqftprice,funished,bathroom,facing,transaction,type,city,bedrooms,floors,isPrimeLocatoin,lifespan);
+                        RealEstateData newRealEstate = new RealEstateData(ID, possessionStatus, commercial, developer, price, sqftprice, funished, bathroom, facing, transaction, type, city, bedrooms, floors, isPrimeLocatoin, lifespan);
 
-                        mybst.remove(newRealEstate);
+                        Object result = mybst.remove(newRealEstate);
                         System.out.println(newRealEstate);
                         writeToFile("\n", "./result.txt");
                         writeToFile("Removed: " + newRealEstate, "./result.txt");
+
                     }
                 }
             }
-            case "search" ->{
+            case "print" ->{
+                //print statement with a StringBuilder collecting the content of the BST
+                StringBuilder treeContent = new StringBuilder();
+                //for statement appending the values of the bst
+                for(RealEstateData realEstate : mybst){
+                    treeContent.append(realEstate).append("\n");
+                    treeContent.append(" ");
+                }
+                //writing to the file and printing the result
+                writeToFile("Printing Result:" + "\n" + treeContent.toString(), "./result.txt");
+                writeToFile("\n", "./result.txt");
+            }
+            case "seek" ->{
                 csvScanner.nextLine();
                 while(csvScanner.hasNextLine()){
                     String line = csvScanner.nextLine().trim();
@@ -149,23 +163,23 @@ public class Parser {
                         String lifespan = data[15];
 
                         RealEstateData newRealEstate = new RealEstateData(ID,possessionStatus,commercial,developer,price,sqftprice,funished,bathroom,facing,transaction,type,city,bedrooms,floors,isPrimeLocatoin,lifespan);
-                        System.out.println("TEST");
-                        mybst.find(newRealEstate);
+                        Object result = mybst.find(newRealEstate);
+                        System.out.println(newRealEstate);
+                        writeToFile("\n", "./result.txt");
                         writeToFile("Searching ID: " + ID, "./result.txt");
+                        boolean found = result != null;
+                        if(found){
+                            writeToFile("\n", "./result.txt");
+                            writeToFile("Found ID: " + ID, "./result.txt");
+                            writeToFile("\n", "./result.txt");
+                        }else{
+                            writeToFile("\n", "./result.txt");
+                            writeToFile("Not Found ID: " + ID, "./result.txt");
+                            writeToFile("\n", "./result.txt");
+                        }
                     }
                 }
-            }
-            case "print" ->{
-                //print statement with a StringBuilder collecting the content of the BST
-                StringBuilder treeContent = new StringBuilder();
-                //for statement appending the values of the bst
-                for(RealEstateData realEstate : mybst){
-                    treeContent.append(realEstate).append("\n");
-                    treeContent.append(" ");
-                }
-                //writing to the file and printing the result
-                writeToFile("Printing Result:" + "\n" + treeContent.toString(), "./result.txt");
-                writeToFile("\n", "./result.txt");
+
             }
             // call writeToFile
             // default case for Invalid Command

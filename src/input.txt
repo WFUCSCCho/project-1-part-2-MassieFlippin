@@ -1,8 +1,15 @@
      insert 1
 insert 25
             insert 2
+insert 300
+
 insert 400
+
+remove 400
 
 remove 1
 
-search 2
+seek 2
+
+
+print
