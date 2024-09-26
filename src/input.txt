@@ -1,7 +1,7 @@
      insert 1234
 insert 25
             insert 2
-
+insert 4000
 
 insert 500
 
@@ -12,6 +12,8 @@ insert 400
 remove 400
 
            remove 40
+
+     remove 10
 
 remove 2
 
