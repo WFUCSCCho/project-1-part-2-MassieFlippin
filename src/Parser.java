@@ -97,6 +97,7 @@ public class Parser {
                     String line = csvScanner.nextLine().trim();//trims away any data
                     if(line.isEmpty()) continue;
                     data = line.split(",", -1);
+                    try{
                     if(data[0].equals(command[1])) {
                         int ID = Integer.parseInt(data[0]);
                         String possessionStatus = data[1];
@@ -122,7 +123,11 @@ public class Parser {
                         System.out.println(newRealEstate);
                         writeToFile("\n", "./result.txt");
                         writeToFile("Removed: " + newRealEstate, "./result.txt");
+                    }
 
+                    }
+                    catch(NumberFormatException e){
+                        writeToFile("Error: Invalid Remove", "./result.txt");
                     }
                 }
             }
@@ -144,39 +149,41 @@ public class Parser {
                     String line = csvScanner.nextLine().trim();
                     if(line.isEmpty()) continue;
                     data = line.split(",", -1);
-                    if(data[0].equals(command[1])){
-                        int ID = Integer.parseInt(data[0]);
-                        String possessionStatus = data[1];
-                        String commercial = data[2];
-                        String developer = data[3];
-                        int price = Integer.parseInt(data[4]);
-                        int sqftprice = Integer.parseInt(data[5]);
-                        String funished = data[6];
-                        int bathroom = Integer.parseInt(data[7]);
-                        String facing = data[8];
-                        String transaction = data[9];
-                        String type = data[10];
-                        String city = data[11];
-                        int bedrooms = Integer.parseInt(data[12]);
-                        int floors = Integer.parseInt(data[13]);
-                        String isPrimeLocatoin = data[14];
-                        String lifespan = data[15];
+                    try {
+                        if (data[0].equals(command[1])) {
+                            int ID = Integer.parseInt(data[0]);
+                            String possessionStatus = data[1];
+                            String commercial = data[2];
+                            String developer = data[3];
+                            int price = Integer.parseInt(data[4]);
+                            int sqftprice = Integer.parseInt(data[5]);
+                            String funished = data[6];
+                            int bathroom = Integer.parseInt(data[7]);
+                            String facing = data[8];
+                            String transaction = data[9];
+                            String type = data[10];
+                            String city = data[11];
+                            int bedrooms = Integer.parseInt(data[12]);
+                            int floors = Integer.parseInt(data[13]);
+                            String isPrimeLocatoin = data[14];
+                            String lifespan = data[15];
 
-                        RealEstateData newRealEstate = new RealEstateData(ID,possessionStatus,commercial,developer,price,sqftprice,funished,bathroom,facing,transaction,type,city,bedrooms,floors,isPrimeLocatoin,lifespan);
-                        Object result = mybst.find(newRealEstate);
-                        System.out.println(newRealEstate);
-                        writeToFile("\n", "./result.txt");
-                        writeToFile("Searching ID: " + ID, "./result.txt");
-                        boolean found = result != null;
-                        if(found){
+
+                            RealEstateData newRealEstate = new RealEstateData(ID, possessionStatus, commercial, developer, price, sqftprice, funished, bathroom, facing, transaction, type, city, bedrooms, floors, isPrimeLocatoin, lifespan);
+                            Object result = mybst.find(newRealEstate);
+                            System.out.println(newRealEstate);
+                            writeToFile("\n", "./result.txt");
+                            writeToFile("Searching ID: " + ID, "./result.txt");
                             writeToFile("\n", "./result.txt");
                             writeToFile("Found ID: " + ID, "./result.txt");
                             writeToFile("\n", "./result.txt");
-                        }else{
-                            writeToFile("\n", "./result.txt");
-                            writeToFile("Not Found ID: " + ID, "./result.txt");
-                            writeToFile("\n", "./result.txt");
                         }
+
+                    }
+                    catch (NumberFormatException e){
+                        writeToFile("\n", "./result.txt");
+                        writeToFile("Not Found ID:", "./result.txt");
+                        writeToFile("\n", "./result.txt");
                     }
                 }
 

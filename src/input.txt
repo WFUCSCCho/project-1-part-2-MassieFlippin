@@ -9,7 +9,11 @@ remove 400
 
 remove 1
 
-seek 2
+remove 10
+
+seek 300
+
+seek 6
 
 
 print
